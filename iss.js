@@ -39,7 +39,7 @@ const fetchCoordsByIP = function(ip, callback) {
     }
     const {latitude, longitude} = JSON.parse(body);
     callback(null, {latitude, longitude});
-  })
+  });
 };
 
 const fetchISSFlyOverTimes = function(coords, callback) {
@@ -55,8 +55,21 @@ const fetchISSFlyOverTimes = function(coords, callback) {
     }
     const time = JSON.parse(body).response;
     callback(null, time);
-  })
+  });
 };
 
+const nextISSTimesForMyLocation = function(responses, callback) {
+  // empty for now
+  if(responses === undefined || responses.length === 0) {
+    callback(err, null);
+    return;
+  }
+  for (let response of responses) {
+    const datetime = new Date(0);
+    datetime.setUTCSeconds(response.risetime);
+    msg = `Next pass at ${datetime} for ${response.duration} seconds`
+    callback(null, msg)
+  }
+};
 
-module.exports = { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes }
+module.exports = { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes, nextISSTimesForMyLocation };
