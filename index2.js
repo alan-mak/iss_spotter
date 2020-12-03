@@ -1,7 +1,10 @@
-let { fetchMyIP } = require('./iss_promised');
+let { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes } = require('./iss_promised');
 
-fetchMyIP().then((body) =>
-  body)
+fetchMyIP()
+  .then(fetchCoordsByIP)
+  // .then(fetchISSFlyOverTimes)
+  .then(body => console.log(body))
+
 
 
 
