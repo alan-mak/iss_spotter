@@ -1,14 +1,9 @@
-let { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes } = require('./iss_promised');
+// let { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes } = require('./iss_promised');
+let {nextISSTimesForMyLocation} = require('./iss_promised');
 
-fetchMyIP()
-  .then(fetchCoordsByIP)
-  .then(fetchISSFlyOverTimes)
-  .then(body => console.log(body))
-
-
-
-
-// .catch(e => {
-    // console.log('Something went wrong')
-    // throw new Error(e);
-  // })
+nextISSTimesForMyLocation()
+.then()
+.catch(e => {
+    console.log('Something went wrong')
+    console.log(e.message);
+  })
